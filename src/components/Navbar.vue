@@ -3,6 +3,7 @@
     <nav>
       <ul>
         <li><router-link to="/home">Home</router-link></li>
+        <li><input type="text" placeholder="Search.."></li>
         <li><button><router-link to="/favoris"><img src="../assets/favori.png" alt="icone favori"></router-link></button></li>
         <li><button><router-link to="/panier"><img src="../assets/sac-de-courses.png" alt="icone panier"></router-link></button></li>
       </ul>
@@ -33,7 +34,7 @@ header {
   background-color: white;
   font-weight: 390;
   text-transform: none;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 }
 
 header a {
@@ -69,6 +70,12 @@ button{
 
 button:hover{
   background-color: lightgray;
+}
+
+li input{
+  padding : 7px;
+  border: 2px solid lightgray;
+  border-radius : 10px;
 }
 
 
