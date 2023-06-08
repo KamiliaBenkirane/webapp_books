@@ -8,16 +8,16 @@
           <h1 class="titre_form">Se connecter</h1>
           <div class="ligne">
             <label><b>E-mail</b></label>
-            <input type="email" v-model="email" placeholder="Email" name="email" required>
+            <input type="email" v-model="mail" placeholder="Email" name="mail" required>
           </div>
           <div class="ligne">
             <label><b>Mot de Passe</b></label>
-            <input type="password" v-model="password" placeholder="Mot de Passe" name="password" required>
+            <input type="password" v-model="mdp" placeholder="Mot de Passe" name="mdp" required>
           </div>
 
 
 
-          <button class="signupButton" @click="register">Se connecter !</button>
+          <button class="signupButton" @click="login()">Se connecter !</button>
         </div>
       </div>
     </div>
@@ -25,9 +25,42 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: "Login"
+  name: "Login",
+  data(){
+    return{
+      email : '',
+      mdp : ''
+    }
+  },
+  methods:{
+    login(){
+      axios.post("http://localhost:3000/login", {
+        mail: this.mail,
+        mdp: this.mdp
+      })
+          .then((response) => {
+            console.log(response)
+            if (response.status  === 400){
+
+            }
+            if (response.status  === 200){
+              this.$router.push('/home')
+            }
+
+
+          })
+          .catch((err) => {
+
+            console.log(err)
+            alert("wrong password")
+          });
+    }
+  }
 }
+
 </script>
 
 <style scoped>
