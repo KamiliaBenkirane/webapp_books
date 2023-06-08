@@ -6,19 +6,38 @@
       <div class="signup_form">
 
         <h1 class="titre_form">Créer un compte</h1>
+
+        <div class="ligne">
+          <label><b>Nom</b></label>
+          <input type="text" v-model="nom" placeholder="Nom" name="nom" required>
+        </div>
+
         <div class="ligne">
           <label><b>Prénom</b></label>
           <input type="text" v-model="prenom" placeholder="Prénom" name="prenom" required>
         </div>
+
         <div class="ligne">
           <label><b>E-mail</b></label>
-          <input type="email" v-model="email" placeholder="Email" name="email" required>
+          <input type="email" v-model="mail" placeholder="E-mail" name="mail" required>
         </div>
+
+        <div class="ligne">
+          <label><b>Numéro de téléphone</b></label>
+          <input type="number" v-model="numero" placeholder="Numéro" name="numero" required>
+        </div>
+
+        <div class="ligne">
+          <label><b>Adresse de facturation</b></label>
+          <input type="text" v-model="adresse" placeholder="Adresse" name="adresse" required>
+        </div>
+
         <div class="ligne">
           <label><b>Mot de Passe</b></label>
-          <input type="password" v-model="password" placeholder="Mot de Passe" name="password" required>
+          <input type="password" v-model="mdp" placeholder="Mot de Passe" name="mdp" required>
         </div>
-        <button class="signupButton" @click="register">M'inscrire !</button>
+
+        <button class="signupButton" @click="register()">M'inscrire !</button>
       </div>
     </div>
   </div>
@@ -26,25 +45,32 @@
 </template>
 
 <script>
-import AuthentificationService from "@/services/authentificationService";
+import axios from 'axios'
 
 export default {
   name: "Register",
   data(){
     return{
+      nom : '',
       prenom : '',
-      email : '',
-      password : ''
+      mail : '',
+      numero : null,
+      adresse : '',
+      mdp : ''
     }
   },
   methods:{
-    async register(){
-      const response = await AuthentificationService.register({
-        prenom : this.prenom,
-        email: this.email,
-        password : this.password
-      })
-      alert(response.data.message)
+    register(){
+      axios.post("http://localhost:3000/createUser", {
+            nom: this.nom,
+            prenom: this.prenom,
+            mail: this.mail,
+            numero: this.numero,
+            adresse: this.adresse,
+            mdp: this.mdp,
+          })
+          .then((response) => console.log(response))
+          .catch((err) => console.log(err));
     }
   }
 }
@@ -96,11 +122,13 @@ export default {
 label{
   z-index: 2;
   font-weight: lighter;
+  font-size : 14px;
+  line-height: 7px;
 }
 
 .register input{
-  margin-top:5px;
-  padding : 10px;
+  margin-top:8px;
+  padding : 8px;
   border : lightgray 1px solid;
   border-radius: 10px;
 }
@@ -138,7 +166,7 @@ label{
 .ligne{
   display: flex;
   flex-direction: column;
-  padding : 8px;
+  padding : 5px;
 }
 
 </style>

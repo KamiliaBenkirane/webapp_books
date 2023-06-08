@@ -13,8 +13,21 @@ import Footer from "@/components/Footer";
 
 
 <script>
+import axios from 'axios'
 export default {
-  name: "Home"
+  name: "Home",
+  data(){
+    return{
+      user : []
+    }
+  },
+  mounted(){
+    axios.get('http://localhost:3000/user')
+        .then((response) => {
+          console.log(response.data.rows);
+        })
+        .catch((err) => console.log(err));
+  }
 }
 </script>
 
