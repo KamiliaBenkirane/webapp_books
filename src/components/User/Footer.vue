@@ -13,11 +13,11 @@ export default {
 
 <style scoped>
 footer {
-  position: fixed;
   height : 70px;
   left: 0;
+  margin : 0;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
   background-color:lightgray;
   color: black;
   display: flex;

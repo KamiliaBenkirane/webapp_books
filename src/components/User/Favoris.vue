@@ -6,8 +6,8 @@
 
 
 <script setup>
-  import Navbar from "@/components/Navbar";
-  import Footer from "@/components/Footer";
+  import Navbar from "@/components/User/Navbar";
+  import Footer from "@/components/User/Footer";
 </script>
 
 

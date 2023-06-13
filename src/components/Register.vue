@@ -61,16 +61,22 @@ export default {
   },
   methods:{
     register(){
-      axios.post("http://localhost:3000/createUser", {
-            nom: this.nom,
-            prenom: this.prenom,
-            mail: this.mail,
-            numero: this.numero,
-            adresse: this.adresse,
-            mdp: this.mdp,
-          })
+      if (this.nom=== '' || this.prenom ==='' || this.mail ===''|| this.numero === null || this.adresse ===''|| this.mdp ===''){
+        alert("Il manque des informations! Merci de remplir tous les champs.")
+      }
+      else{
+        axios.post("http://localhost:3000/createUser", {
+        nom: this.nom,
+        prenom: this.prenom,
+        mail: this.mail,
+        numero: this.numero,
+        adresse: this.adresse,
+        mdp: this.mdp,
+      })
           .then((response) => console.log(response))
           .catch((err) => console.log(err));
+      }
+
     }
   }
 }
@@ -80,7 +86,12 @@ export default {
 
 .form-container{
   height : 100vh;
+  width : 100vw;
+  margin : 0;
   display : flex;
+  background-color: #edebe9;
+  background-image: linear-gradient(0deg, #edebe9 0%, #CEC4D8 100%);
+
   justify-content: center;
   align-items: center;
 }
@@ -135,13 +146,13 @@ label{
 
 .register input:focus{
   outline: none;
-  border : darkseagreen 2px solid;
+  border : #b5b5ce  2px solid;
 }
 
 .signupButton{
   margin-top : 20px;
   padding : 20px 40px;
-  background-color: darkseagreen ;
+  background-color: #b5b5ce ;
   color: white ;
   font-size : 18px;
   font-weight: bold;
@@ -151,7 +162,7 @@ label{
 
 .signupButton:hover{
   cursor: pointer;
-  background-color: #6e9a6f;
+  background-color: #8787b0;
 }
 
 .register a{

@@ -4,17 +4,32 @@
       <ul>
         <li><router-link to="/home">Home</router-link></li>
         <li><input type="text" placeholder="Search.."></li>
-        <li><button><router-link to="/favoris"><img src="../assets/favori.png" alt="icone favori"></router-link></button></li>
-        <li><button><router-link to="/panier"><img src="../assets/sac-de-courses.png" alt="icone panier"></router-link></button></li>
+        <li><router-link to="/favoris"><button><img src="../../assets/favori.png" alt="icone favori"></button></router-link></li>
+        <li><router-link to="/panier"><button class="flex_icone_panier"><img src="../../assets/sac-de-courses.png" alt="icone panier"></button></router-link></li>
+        <li><router-link to="/mesCommandes"><button>Mes commandes</button></router-link></li>
+        <li><router-link to="/"><button @click="logout">Se déconnecter</button></router-link></li>
+
       </ul>
     </nav>
   </header>
 </template>
 
 <script>
+import {useSessionStore} from "@/stores/session";
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Navbar",
+  setup () {
+    const store = useSessionStore()
+    return{store}
+  },
+  methods : {
+    logout(){
+      this.store.$reset()
+    }
+  },
+
 }
 </script>
 
@@ -40,6 +55,7 @@ header {
 header a {
   text-decoration: none;
   color: #2c3e50;
+  align-self : flex-start
 }
 
 header a:hover{
@@ -77,6 +93,7 @@ li input{
   border: 2px solid lightgray;
   border-radius : 10px;
 }
+
 
 
 </style>

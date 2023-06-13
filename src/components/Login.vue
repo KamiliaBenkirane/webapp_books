@@ -26,37 +26,74 @@
 
 <script>
 import axios from 'axios'
+import { useSessionStore} from "@/stores/session";
 
 export default {
   name: "Login",
+  setup () {
+    const store = useSessionStore()
+    return{store}
+  },
   data(){
     return{
-      email : '',
-      mdp : ''
+      mail : '',
+      mdp : '',
     }
   },
   methods:{
     login(){
-      axios.post("http://localhost:3000/login", {
-        mail: this.mail,
-        mdp: this.mdp
-      })
-          .then((response) => {
-            console.log(response)
-            if (response.status  === 400){
+      if(this.mail=== '' || this.mdp ===''){
+        alert("Il manque des informations! Merci de remplir tous les champs.")
+      }
+      else{
+        axios.post("http://localhost:3000/login", {
+          mail: this.mail,
+          mdp: this.mdp
+        })
+            .then((response) => {
+              console.log(response.status);
 
-            }
-            if (response.status  === 200){
-              this.$router.push('/home')
-            }
+              if (response.status === 200) {
+                console.log("entered in 200")
+                if (response.data.message === 'login admin successfull') {
+                  console.log(response.data.message)
 
+                  this.store.setNom(response.data.result.rows[0].nom)
+                  this.store.setPrenom(response.data.result.rows[0].prenom)
+                  this.store.setMail(response.data.result.rows[0].mail)
 
-          })
-          .catch((err) => {
+                  this.$router.push('/homeAdmin');
+                }
 
-            console.log(err)
-            alert("wrong password")
-          });
+                else if (response.data.message === 'login successfull') {
+                  console.log(response.data.message)
+                  console.log(response.data)
+
+                  this.store.setId(response.data.result.rows[0].id)
+                  console.log(this.store.getId())
+                  this.store.setNom(response.data.result.rows[0].nom)
+                  this.store.setPrenom(response.data.result.rows[0].prenom)
+                  this.store.setMail(response.data.result.rows[0].mail)
+                  this.store.setNumero(response.data.result.rows[0].numero)
+                  this.store.setAdresse(response.data.result.rows[0].adresse)
+
+                  this.$router.push('/home');
+                } else {
+                  alert("Unknown login response");
+                }
+              } else if (response.status === 400) {
+                alert("No account found");
+              } else {
+                alert("Une erreur est survenue.");
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+              alert("Adresse mail ou mot de passe incorrect.");
+            });
+
+      }
+
     }
   }
 }
