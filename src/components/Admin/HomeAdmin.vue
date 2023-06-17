@@ -4,19 +4,31 @@
 
     <div class="content">
       <div class="box_container">
+        <router-link to="/ajouterLivre">
         <div class="box">
           <p>Ajouter un livre</p>
           <img class="icone_admin" src="../../assets/images/livre-ouvert.png" alt="livre">
         </div>
-        <div class="box">
-          <p>Supprimer un livre</p>
-          <img class="icone_admin" src="../../assets/images/supprimer.png" alt="livre">
-        </div><div class="box">
-          <p>Gérer les stocks</p>
+        </router-link>
+
+
+          <router-link to="/gererLivres">
+          <div class="box">
+          <p>Gérer les livres</p>
           <img class="icone_admin" src="../../assets/images/en-stock.png" alt="livre">
         </div>
-      </div>
+          </router-link>
+
+
+          <router-link to="/suivreCommandes">
+            <div class="box">
+              <p>Suivre les commandes</p>
+              <img class="icone_admin" src="../../assets/images/livraison-rapide.png" alt="livre">
+            </div>
+          </router-link>
+
     </div>
+  </div>
   </div>
 </template>
 
@@ -79,8 +91,8 @@ export default {
 }
 
 .box{
-  height : 180px;
-  width : 180px;
+  height : 200px;
+  width : 200px;
   display: flex;
   padding-bottom : 20px;
   flex-direction: column;
@@ -95,6 +107,10 @@ export default {
   background-color: #e5e4e2;
 }
 
+a{
+  text-decoration: none;
+  color : black;
+}
 
 
 </style>

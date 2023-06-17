@@ -1,10 +1,12 @@
 <template>
   <div class="sidebar">
     <ul>
+      <router-link to="/homeAdmin">
       <li>
         <img src="../../assets/images/maison.png" alt="">
         <p>Home</p>
       </li>
+      </router-link>
       <li>
         <img src="../../assets/images/statistique.png" alt="">
         <p>Dashboard</p>

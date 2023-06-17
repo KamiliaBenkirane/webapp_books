@@ -54,12 +54,14 @@ export default {
   data(){
     return {
       panier : [],
+      livres : [],
       id : this.store.getId(),
       totalPanier : 0
     }
   },
   created(){
-    this.getPanier()
+    this.getPanier(),
+        this.getBooks()
   },
   methods : {
 
@@ -71,6 +73,13 @@ export default {
         console.log(response.data)
         this.panier = response.data
       })
+    },
+
+    getBooks(){
+      axios.get("http://localhost:3000/getBook").then(response =>{
+        console.log(response)
+        this.livres = response.data;
+      } )
     },
 
     getTotalPanier(){
@@ -90,17 +99,25 @@ export default {
     },
 
     incrementQuantite(element){
-      element.quantite+=1
-      let infoBook = {
-        id_user : element.id_user,
-        id_livre: element.id_livre
-      }
-      axios.post("http://localhost:3000/incrementQuantite", infoBook).then(response =>{
-        if (response.status === 400){
-          alert("echec de la requete")
+
+      const livreId = this.livres.find((livre) => livre.id === element.id_livre);
+      if(element.quantite<livreId.stock){
+        element.quantite+=1
+        let infoBook = {
+          id_user : element.id_user,
+          id_livre: element.id_livre
         }
-      })
-    },
+        axios.post("http://localhost:3000/incrementQuantite", infoBook).then(response =>{
+          if (response.status === 400){
+            alert("echec de la requete")
+          }
+        })
+
+      }
+      else{
+        alert("Limite de stock")
+      }
+      },
 
     decrementQuantite(element){
       if(element.quantite>0){

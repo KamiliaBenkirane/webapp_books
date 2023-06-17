@@ -6,6 +6,9 @@ import Commandes from '../components/User/Commandes.vue';
 import Register from '../components/Register.vue';
 import Login from '../components/Login.vue';
 import HomeAdmin from '../components/Admin/HomeAdmin';
+import AjouterLivre from '../components/Admin/AjouterLivre';
+import GererLivres from '../components/Admin/GererLivres';
+import SuivreCommandes from '../components/Admin/SuivreCommandes';
 
 
 const routes = [
@@ -16,6 +19,9 @@ const routes = [
     {path: '/', component: Login},
     {path: '/register', component: Register},
     {path: '/homeAdmin', component: HomeAdmin},
+    {path: '/ajouterLivre', component: AjouterLivre},
+    {path: '/gererLivres', component: GererLivres},
+    {path: '/suivreCommandes', component: SuivreCommandes},
 ]
 
 

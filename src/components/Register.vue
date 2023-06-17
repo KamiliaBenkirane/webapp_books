@@ -7,6 +7,7 @@
 
         <h1 class="titre_form">Créer un compte</h1>
 
+
         <div class="ligne">
           <label><b>Nom</b></label>
           <input type="text" v-model="nom" placeholder="Nom" name="nom" required>
@@ -178,6 +179,13 @@ label{
   display: flex;
   flex-direction: column;
   padding : 5px;
+  width :100%;
+}
+
+.ligne_container{
+  display : flex;
+  width : 100%;
+  flex-direction : row;
 }
 
 </style>

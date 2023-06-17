@@ -5,8 +5,7 @@
       <div class="bloc_commande" v-for="commande in suppressDoublons(this.commandes)" :key="commande.num_commande">
 
         <div>
-          <h4> Satut de la commande : {{commande.statut}}</h4>
-          <p>Nombre d'articles : {{commande.total}}</p>
+          <h4> <u>Satut de la commande</u> : {{commande.statut}}</h4>
         </div>
         <div class="bloc_articles">
           <div  class="article" v-for="article in this.commandes" v-show="commande.num_commande === article.num_commande "  :key="article.id_commande">
@@ -21,8 +20,8 @@
 
         <div class="bloc_details_commande">
           <div>
-            <p>Num commande : {{commande.num_commande}}</p>
-            <p>Date de commande : {{commande.date}}</p>
+            <p><u>Num commande</u> : {{commande.num_commande}}</p>
+            <p><u>Date de commande</u> : {{formattedDate(commande)}}</p>
           </div>
           <div>
             <button>Voir la commande</button>
@@ -94,8 +93,13 @@ export default {
           };
         }
       });
-
       return Object.values(result);
+    },
+    formattedDate(element){
+      const date = new Date(element.date);
+      const options = { day: "numeric", month: "long", year: "numeric" };
+      const formattedDate = date.toLocaleDateString("fr-FR", options);
+      return formattedDate
     }
   }
 }
@@ -115,7 +119,7 @@ export default {
 
 img{
   height : auto;
-  width : 100px;
+  width : 120px;
 }
 
 .bloc_commande{
@@ -134,6 +138,7 @@ img{
   height : 200px;
   flex-direction: row;
   flex-wrap : wrap;
+  gap : 10px;
 }
 
 .bloc_details_commande{

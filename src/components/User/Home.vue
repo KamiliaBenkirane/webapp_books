@@ -19,9 +19,14 @@
           </p>
           <h5 class="livre-note">Note : {{livre.note}}/5</h5>
           <h5 class="livre_prix">Prix : {{livre.prix}}€ </h5>
-          <div>
-            <button id="addToCart" @click="addToCart(livre)">Ajouter au panier</button>
-            <button @click="decrement(livre)">-</button> {{ livre.quantite }} <button @click="livre.quantite+=1">+</button>
+          <div v-if="livre.stock>0">
+            <button v-if="livre.quantite>0" class="addToCart" @click="addToCart(livre)">Ajouter au panier</button>
+            <button v-else class="addToCartDisabled" @click="addToCart(livre)" disabled>Ajouter au panier</button>
+            <button @click="decrement(livre)">-</button> {{ livre.quantite }} <button @click="increment(livre)">+</button>
+            <p v-show="livre.quantite === livre.stock">Limite du stock !</p>
+          </div>
+          <div v-else>
+            <h3 class="stock-vide">Plus en stock :(</h3>
           </div>
         </div>
       </div>
@@ -53,7 +58,7 @@ export default {
     return{
       livres : [],
       compteur : 0,
-      totalPanier : this.store.user.totalPanier
+      totalPanier : this.store.user.totalPanier,
     }
   },
   created() {
@@ -67,9 +72,16 @@ export default {
       } )
     },
 
+
+
     decrement(livre){
       if (livre.quantite>0){
         livre.quantite -= 1;
+      }
+    },
+    increment(livre){
+      if (livre.quantite<livre.stock){
+        livre.quantite += 1;
       }
     },
     showFullDescription(livre){
@@ -139,14 +151,26 @@ button:hover{
 
 }
 
-#addToCart{
+.addToCart{
   background-color: #a91e00;
   padding : 10px;
   font-size : 15px;
   color : white;
 }
 
-#addToCart:hover{
+.addToCartDisabled{
+  background-color: lightgray;
+  padding : 10px;
+  font-size : 15px;
+  color : black;
+}
+
+.addToCartDisabled:hover{
+  background-color: lightgray;
+  cursor: not-allowed;
+}
+
+.addToCart:hover{
   background-color: #811700;
   cursor: pointer;
 }
@@ -284,6 +308,10 @@ p {
 .read-more{
   cursor: pointer;
   color: blue;
+}
+
+.livre-item .stock-vide{
+  color : red;
 }
 
 </style>
