@@ -147,7 +147,7 @@ label{
 
 .register input:focus{
   outline: none;
-  border : #b5b5ce  2px solid;
+  border : grey 2px solid;
 }
 
 .signupButton{

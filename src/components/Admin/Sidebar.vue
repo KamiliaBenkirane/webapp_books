@@ -7,10 +7,12 @@
         <p>Home</p>
       </li>
       </router-link>
+      <router-link to="/stats">
       <li>
         <img src="../../assets/images/statistique.png" alt="">
-        <p>Dashboard</p>
+        <p>Statistiques</p>
       </li>
+      </router-link>
     </ul>
     <div class="user-logout">
       <div class="user">
@@ -53,6 +55,7 @@ export default {
 
 a{
   text-decoration: none;
+  color: black;
 }
 
 

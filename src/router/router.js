@@ -9,6 +9,9 @@ import HomeAdmin from '../components/Admin/HomeAdmin';
 import AjouterLivre from '../components/Admin/AjouterLivre';
 import GererLivres from '../components/Admin/GererLivres';
 import SuivreCommandes from '../components/Admin/SuivreCommandes';
+import Statistiques from '../components/Admin/Statistiques';
+import UserStats from '../components/Admin/UserStats';
+import LivreStats from '../components/Admin/LivreStats';
 
 
 const routes = [
@@ -22,6 +25,9 @@ const routes = [
     {path: '/ajouterLivre', component: AjouterLivre},
     {path: '/gererLivres', component: GererLivres},
     {path: '/suivreCommandes', component: SuivreCommandes},
+    {path: '/stats', component: Statistiques},
+    {path: '/userStats', component: UserStats},
+    {path: '/livreStats', component: LivreStats},
 ]
 
 
