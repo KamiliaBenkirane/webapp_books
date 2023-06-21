@@ -109,6 +109,7 @@ export default {
           alert("Un problème est survenu")
         }
       })
+      livre.stock-=livre.quantite
       livre.quantite = 0
       this.store.addLivre(livre)
       this.store.user.totalPanier+=(livre.prix*livre.quantite)
