@@ -128,6 +128,7 @@ header  img{
   width : auto;
 }
 nav ol{
+  font-size: 16px;
   margin-left: 50px;
   margin-top: 20px;
 }

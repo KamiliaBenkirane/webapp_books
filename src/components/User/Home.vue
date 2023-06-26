@@ -5,7 +5,7 @@
 
     <div class="search-container">
       <input type="text" v-model="searchQuery" placeholder="Rechercher un livre" @input="filterBooks" class="search-input">
-
+      <i class="fas fa-search search-icon"></i>
       <div v-for="livre in filteredLivres" :key="livre.id" class="livre-item"></div>
     </div>
 
@@ -264,8 +264,6 @@ button:hover{
   font-family: 'Palatino', serif;
 }
 
-
-/* Styles pour le conteneur principal */
 .livres-list {
   grd-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   width : 100%;
@@ -307,8 +305,6 @@ body {
   overflow: hidden;
 }
 
-
-/* Styles pour le titre */
 h1 {
   font-size: 40px;
   text-align: center;
@@ -316,7 +312,6 @@ h1 {
   margin-top: 70px;
 }
 
-/* Styles pour la description */
 p {
   font-size: 18px;
   text-align: center;
@@ -328,9 +323,7 @@ p {
   width: calc(33.33% - 20px);
   margin-right: 10px;
   margin-bottom: 20px;
-  /*A ete modifier*/
   padding: 0;
-  /*A ete modifier*/
   border: 1px solid unset;
   border-radius: 20px;
   background-color: unset;
@@ -341,11 +334,8 @@ p {
 
 .livre-item img {
   border-radius: 20px;
-  /*A ete modifier*/
   max-width: 100%;
   height: auto;
-  /*Tout ce qui suit après a ete ajouter*/
-  //object-fit: contain;
   opacity: 1;
   display: block;
   transition: .5s ease;
@@ -398,7 +388,6 @@ p {
   opacity: 1;
 }
 
-/*Tout ce qui suit après a ete ajouter*/
 .middle{
   z-index: 1;
   text-align: center;
@@ -414,7 +403,6 @@ p {
   align-items: center;
   padding: 10px;
   transition: opacity 0.5s ease;
-  //background-color: rgba(0, 0, 0, 0.5);
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%)
 }
@@ -441,13 +429,13 @@ p {
 }
 
 .livre-item p {
-  font-size: 12px;
+  font-size: 16px;
   margin-bottom: 5px;
   color: white;
 }
 
 .livre-title {
-  font-size: 20px;
+  font-size:30px;
   font-weight: bold;
   font-family: 'Palatino', serif;
 }
@@ -464,7 +452,6 @@ p {
   overflow: hidden;
   max-height: 3em;
   line-height: 1.5em;
-  /*Tout ce qui suit après a ete ajouter*/
   font-family: 'Palatino', serif;
 }
 
@@ -473,12 +460,11 @@ p {
   text-align: justify;
   overflow: hidden;
   max-height: 80px;
-  /*A ete modifier*/
   line-height: 1.5em;
-  /*Tout ce qui suit après a ete ajouter*/
   font-family: 'Palatino', serif;
-  /*A ete modifier*/
   height: 200px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 
