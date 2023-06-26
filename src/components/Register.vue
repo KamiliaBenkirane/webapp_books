@@ -85,14 +85,19 @@ export default {
 
 <style >
 
+
+
 .form-container{
-  height : 100vh;
-  width : 100vw;
+  height : 100%;
+  width : 100%;
   margin : 0;
   display : flex;
   background-color: #edebe9;
-  background-image: linear-gradient(0deg, #edebe9 0%, #CEC4D8 100%);
-
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://wallpapercave.com/wp/wp5991978.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: fixed;
   justify-content: center;
   align-items: center;
 }
@@ -102,12 +107,13 @@ export default {
   font-weight :700;
   font-size : 40px;
   line-height: 20px;
+  color: #162142;
 }
 
 .info_form{
   line-height: 0;
   font-size : 15px;
-  color : grey;
+  color : white;
 }
 
 
@@ -132,6 +138,7 @@ export default {
 }
 
 label{
+  color: #162142;
   z-index: 2;
   font-weight: lighter;
   font-size : 14px;
@@ -153,7 +160,7 @@ label{
 .signupButton{
   margin-top : 20px;
   padding : 20px 40px;
-  background-color: #b5b5ce ;
+  background-color: #3F89A7;
   color: white ;
   font-size : 18px;
   font-weight: bold;
@@ -163,7 +170,7 @@ label{
 
 .signupButton:hover{
   cursor: pointer;
-  background-color: #8787b0;
+  background-color: #6FABB5;
 }
 
 .register a{

@@ -42,7 +42,7 @@ export default {
 <style scoped>
 .user-logout{
   margin-top: 60vh;
-  background-color: #ececec;
+  background-color: white;
   height : 100px;
   padding : 10px;
   display: flex;
@@ -93,7 +93,10 @@ a{
 .sidebar {
   transition : all 0.2s ease;
   width: 70px;
-  background-color: #f1f1f1;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://wallpapercave.com/wp/wp5991978.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   height: 100vh;
   position: fixed;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

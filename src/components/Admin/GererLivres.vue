@@ -1,22 +1,18 @@
 <template>
   <Sidebar/>
-  <div class="container">
-    <div v-for="livre in livres" :key="livre.id" class="livre-item">
-      <img :src="livre.image" alt="image_livre">
-      <h4>{{ livre.titre }}</h4>
-      <p>Stock actuel : {{livre.stock}}</p>
-      <p><u>Ajouter ou supprimer stock :</u></p>
-      <div class="stock">
-
-        <button @click="decrementQuantite(livre)">-</button> <h3>{{ livre.quantite }}</h3> <button @click="livre.quantite+=1">+</button>
-        <button @click="modifierStock(livre)">Appliquer</button>
+    <div class="container">
+      <div v-for="livre in livres" :key="livre.id" class="livre-item">
+        <img :src="livre.image" alt="image_livre">
+        <h4>{{ livre.titre }}</h4>
+        <p>Stock actuel : {{livre.stock}}</p>
+        <p><u>Ajouter ou supprimer stock :</u></p>
+        <div class="stock">
+          <button @click="decrementQuantite(livre)">-</button> <h3>{{ livre.quantite }}</h3> <button @click="livre.quantite+=1">+</button>
+          <button @click="modifierStock(livre)">Appliquer</button>
+        </div>
+        <button @click="supprimerLivre(livre)">Supprimer le livre</button>
       </div>
-      <button @click="supprimerLivre(livre)">Supprimer le livre</button>
-
     </div>
-  </div>
-
-
 </template>
 
 <script>
@@ -85,10 +81,12 @@ export default {
 
 <style scoped>
 
+
 .container{
-  margin-left : 150px;
-  width: 80vw;
-  height: 100vh;
+  background-color: #3F89A7;
+  margin-left : 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -100,22 +98,30 @@ img{
   align-self: center;
   width: auto;
   height: 200px;
+  border-radius: 10px;
 }
 h4{
   line-height: 15px;
+  color: white;
 }
 .livre-item{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://wallpapercave.com/wp/wp5991978.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   width : 200px;
   display: flex;
   flex-direction: column;
-  gap : 2px;
-  padding : 20px;
-  background-color: #cccccc;
+  gap : 1px;
+  padding : 10px;
+  background-color: unset;
   border-radius: 10px;
+  margin-top: 100px;
 }
 
 p{
   line-height: 10px;
+  color: white;
 }
 
 .stock {

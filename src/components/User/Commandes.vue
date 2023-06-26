@@ -1,5 +1,6 @@
 <template>
   <Navbar/>
+  <div class="background-image"></div>
   <div class="container">
 
       <div class="bloc_commande" v-for="commande in suppressDoublons(this.commandes)" :key="commande.num_commande">
@@ -155,6 +156,19 @@ img{
   justify-content: center;
   align-items: center;
   width : 180px;
+}
+
+.background-image{
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://wallpapercave.com/wp/wp5991978.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 </style>

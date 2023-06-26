@@ -55,6 +55,10 @@ export default {
 }
 
 .box{
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://wallpapercave.com/wp/wp5991978.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   height : 200px;
   width : 200px;
   display: flex;
@@ -71,9 +75,9 @@ export default {
   background-color: #e5e4e2;
 }
 
-a{
+a, p{
   text-decoration: none;
-  color : black;
+  color : white;
 }
 
 </style>

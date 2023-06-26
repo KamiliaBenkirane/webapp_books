@@ -70,6 +70,7 @@ export default {
 
 
 .content {
+  background-color: #3F89A7;
   height : 100vh;
   width: 100vw;
   padding: 20px;
@@ -98,7 +99,10 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ececea;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://wallpapercave.com/wp/wp5991978.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius : 10px;
 }
 
@@ -109,7 +113,7 @@ export default {
 
 a{
   text-decoration: none;
-  color : black;
+  color : white;
 }
 
 

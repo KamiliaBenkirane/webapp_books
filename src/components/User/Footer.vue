@@ -18,8 +18,8 @@ footer {
   margin : 0;
   bottom: 0;
   width: 100vw;
-  background-color:lightgray;
-  color: black;
+  background-color:white;
+  color: #162142;
   display: flex;
   align-items: center;
   justify-content: center;

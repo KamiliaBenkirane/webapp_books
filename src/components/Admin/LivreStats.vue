@@ -67,19 +67,23 @@ export default {
 }
 
 #livres td, #livres th {
+  color: #162142;
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-#livres tr:nth-child(even){background-color: #f2f2f2;}
+#livres tr:nth-child(even){background-color: #3F89A7;}
 
-#livres tr:hover {background-color: #ddd;}
+#livres tr:hover {background-color: #F4F7F9;}
 
 #livres th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #04AA6D;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://wallpapercave.com/wp/wp5991978.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
 }
 </style>

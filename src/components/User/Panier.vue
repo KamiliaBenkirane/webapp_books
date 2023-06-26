@@ -1,5 +1,6 @@
 <template>
   <Navbar/>
+  <div class="background-image"></div>
   <div class="page">
   <div class="container">
   <div v-for="element in panier" :key="element.id" v-show="element.quantite>0" class="panier-item">
@@ -156,6 +157,8 @@ export default {
 
 <style scoped>
 
+
+
 .page{
   height : 100vh;
   width : 100vw;
@@ -191,10 +194,14 @@ img{
   align-items: center;
 }
 
+h1{
+  color: black;
+}
 
 h2{
   font-size : 15px;
 }
+
 .info{
   display: flex;
   flex-direction: column;

@@ -145,12 +145,19 @@ img{
   height : auto;
   width : 70px;
 }
+h4, p{
+  color: white;
+}
+
 .bloc_commande{
   width : 70vw;
   display: flex;
   flex-direction: column;
   justify-content: left;
-  background-color: #cccccc;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://wallpapercave.com/wp/wp5991978.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 10px;
   padding : 10px;
 }

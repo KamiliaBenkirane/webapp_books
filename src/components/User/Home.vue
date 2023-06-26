@@ -2,36 +2,63 @@
   <div>
     <Navbar/>
     <div class="background-image"></div>
+
+    <div class="search-container">
+      <input type="text" v-model="searchQuery" placeholder="Rechercher un livre" @input="filterBooks" class="search-input">
+
+      <div v-for="livre in filteredLivres" :key="livre.id" class="livre-item"></div>
+    </div>
+
     <div class="content">
-      <h1 class="title">MarLia.Bibliothèque</h1>
-      <p class="description">Découvrez les dernières actualités et les meilleurs livres du moment.</p>
-      <div class="livres-list">
-        <div v-for="livre in livres" :key="livre.id" class="livre-item">
-          <img class="image_livre" :src="livre.image" alt="wallpaperbetter1">
-          <h4 class="livre-title">{{ livre.titre }}</h4>
-          <h5 class="livre-auteur"><u>Auteur(e)</u> : {{ truncateText(livre.auteur, 50) }}</h5>
-          <h5 class="livre-genres"><u>Genres</u> : {{ parseArrayString(livre.genres) }}</h5>
-          <h5 class="livre-edition"><u>Maison d'édition</u> : {{ truncateText(livre.edition, 50) }}</h5>
-          <p class="livre-description"><u>Résumé</u> : {{ truncateText(livre.resume, 150) }}
-            <span v-if="livre.resume.length > 150" class="read-more" @click="showFullDescription(livre)">
-              Lire la suite
-            </span>
-          </p>
-          <h5 class="livre-note">Note : {{livre.note}}/5</h5>
-          <h5 class="livre_prix">Prix : {{livre.prix}}€ </h5>
-          <div v-if="livre.stock>0">
-            <button v-if="livre.quantite>0" class="addToCart" @click="addToCart(livre)">Ajouter au panier</button>
-            <button v-else class="addToCartDisabled" @click="addToCart(livre)" disabled>Ajouter au panier</button>
-            <button @click="decrement(livre)">-</button> {{ livre.quantite }} <button @click="increment(livre)">+</button>
-            <p v-show="livre.quantite === livre.stock">Limite du stock !</p>
-          </div>
-          <div v-else>
-            <h3 class="stock-vide">Plus en stock :(</h3>
+      <p class="description">Bienvenue dans notre librairie en ligne, où les livres prennent vie et les histoires s'épanouissent !
+        <br>Découvrez un univers infini et captivant pour nourrir votre esprit, à portée de clic.
+        <br>Achetez en toute simplicité et profitez de nos prix inbattables pour vous offrir des heures de lecture inoubliables.
+      </p>
+
+      <section class="banniere1" id="banniere1">
+        <div class="livres-list">
+          <div v-for="livre in livres" :key="livre.id" class="livre-item">
+            <div class="image-container">
+              <img class="image_livre" :src="livre.image" alt="wallpaperbetter1">
+              <div class="middle" id="middle">
+                <h4 class="livre-title">{{ livre.titre }}</h4>
+                <h5 class="livre-auteur"><u>Auteur(e)</u> : {{ livre.auteur }}</h5>
+                <h5 class="livre-genres"><u>Genres</u> : {{ parseArrayString(livre.genres) }}</h5>
+                <h5 class="livre-edition"><u>Maison d'édition</u> : {{ livre.edition }}</h5>
+              </div>
+            </div>
+            <p class="livre-description">
+              <u>Résumé</u> : {{ livre.showFullDescription ? livre.resume : truncateText(livre.resume, 150) }}
+              <span v-if="livre.resume.length > 150" class="read-more" @click="showFullDescription(livre)">
+                Lire la suite
+              </span>
+            </p>
+            <h5 class="livre-note">Note : {{livre.note}}/5</h5>
+            <h5 class="livre-prix">Prix : {{livre.prix}}€ </h5>
+            <div v-if="livre.stock>0">
+              <button v-if="livre.quantite>0" class="addToCart" @click="addToCart(livre)">Ajouter au panier</button>
+              <button v-else class="addToCartDisabled" @click="addToCart(livre)" disabled>Ajouter au panier</button>
+              <button @click="decrement(livre)">-</button> {{ livre.quantite }} <button @click="increment(livre)">+</button>
+              <p v-show="livre.quantite === livre.stock">Limite du stock !</p>
+            </div>
+            <div v-else>
+              <h3 class="stock-vide">Plus en stock :(</h3>
+            </div>
           </div>
         </div>
-      </div>
+
+        <section class="banniere2">
+          <div>
+            <a href="#" class="btn-catalogue">Voir Plus</a>
+          </div>
+        </section>
+
+      </section>
     </div>
     <Footer/>
+
+
+
   </div>
 </template>
 
@@ -52,13 +79,15 @@ export default {
   },
   setup () {
     const store = useSessionStore()
-    return{store}
+    return{store};
   },
   data(){
     return{
       livres : [],
       compteur : 0,
       totalPanier : this.store.user.totalPanier,
+      searchQuery: '',
+      filteredLivres: []
     }
   },
   created() {
@@ -72,6 +101,18 @@ export default {
       } )
     },
 
+    methods: {
+      filterBooks() {
+        if (this.searchQuery) {
+          const query = this.searchQuery.toLowerCase();
+          this.filteredLivres = this.livres.filter(livre => {
+            return livre.titre.toLowerCase().includes(query);
+          });
+        } else {
+          this.filteredLivres = this.livres;
+        }
+      }
+    },
 
 
     decrement(livre){
@@ -131,12 +172,50 @@ export default {
 
 <style scoped>
 
+.search-container{
+  background-color: #143B60;
+  display: flex;
+  justify-content: center;
+  font-weight: 360;
+  top: 0;
+  left: 0;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  margin-top: 60px;
+  z-index: 2;
+  position: fixed;
+
+}
+.search-input{
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: border-color 0.3s ease;
+}
+.search-input:focus{
+  border-color: #3F89A7;
+}
+.search-icon{
+  background-color: #3F89A7;
+  position: absolute;
+  right: 10px;
+  color: #999;
+  transition: color 0.3s ease;
+}
+.search-container:hover .search-icon{
+  color: #3F89A7;
+}
+
 body{
-  font-family: Avenir, serif;
+  font-family:'Palatino', serif;;
   font-weight: 500;
 }
 
-
+.banniere1{
+  padding: 100px;
+}
 
 button{
   border : none;
@@ -153,7 +232,7 @@ button:hover{
 }
 
 .addToCart{
-  background-color: #a91e00;
+  background-color: #3F89A7;
   padding : 10px;
   font-size : 15px;
   color : white;
@@ -172,40 +251,32 @@ button:hover{
 }
 
 .addToCart:hover{
-  background-color: #811700;
+  background-color: goldenrod;
   cursor: pointer;
 }
 
-.title {
-  font-size: 50px;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-
-}
-
 .description {
-  font-size: 18px;
+  font-size: 20px;
   color: white;
+  padding: 20px;
   text-align: center;
   margin-bottom: 30px;
+  font-family: 'Palatino', serif;
 }
 
-h1 {
-  margin-top: 70px;
-}
 
 /* Styles pour le conteneur principal */
 .livres-list {
-  width : 100vw;
+  grd-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  width : 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
+  text-align: center;
 
 }
 
@@ -216,15 +287,18 @@ h1 {
   width: 100%;
   height: 100%;
   z-index: -1;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://wallpapercave.com/wp/wp3112585.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://wallpapercave.com/wp/wp5991978.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .content{
+  max-width: 100%;
+  text-align: center;
+  align-items: center;
   margin-top: 70px;
-  padding: 20px 0;
+  padding: 20px ;
 }
 
 body {
@@ -237,51 +311,145 @@ body {
 /* Styles pour le titre */
 h1 {
   font-size: 40px;
-  color: #333;
   text-align: center;
   margin-bottom: 20px;
+  margin-top: 70px;
 }
 
 /* Styles pour la description */
 p {
   font-size: 18px;
-  color: #666;
   text-align: center;
 }
 
 
 .livre-item {
-  width: 300px;
-  margin-right: 20px;
+  position: relative;
+  width: calc(33.33% - 20px);
+  margin-right: 10px;
   margin-bottom: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #F4F7F9;
+  /*A ete modifier*/
+  padding: 0;
+  /*A ete modifier*/
+  border: 1px solid unset;
+  border-radius: 20px;
+  background-color: unset;
   text-align : center;
+  align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .livre-item img {
-  border-radius: 5px;
-  width: 60%;
+  border-radius: 20px;
+  /*A ete modifier*/
+  max-width: 100%;
   height: auto;
+  /*Tout ce qui suit après a ete ajouter*/
+  //object-fit: contain;
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+}
+
+.image-container{
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  align-items: center;
+  transition: opacity 0.5s ease;
+}
+
+.image-container img{
+   display: block;
+  width: 100%;
+  height: auto;
+  opacity: 1;
+  transition: transform 0.5s ease;
+}
+
+.image-container::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.image-container:hover img{
+  transform: scale(1.20);
+
+}
+.image-container:hover::after{
+  opacity: 1;
+}
+
+/*Tout ce qui suit après a ete ajouter*/
+.middle{
+  z-index: 1;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;height: 100%;
+  box-sizing: border-box;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  transition: opacity 0.5s ease;
+  //background-color: rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.image-container:hover .middle{
+  opacity: 1;
+}
+
+.livre-item h4{
+  color: white;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.livre-item h5{
+  color: white;
+  font-size: 14px;
+  margin-bottom: 5px;
 }
 
 .livre-item h3 {
-  font-size: 18px;
-  color: #333;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
 
 .livre-item p {
-  font-size: 14px;
-  color: #666;
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: white;
 }
 
 .livre-title {
   font-size: 20px;
   font-weight: bold;
-  color: black;
+  font-family: 'Palatino', serif;
 }
 
 .livre-auteur,
@@ -290,19 +458,27 @@ p {
 .livre-note,
 .livre-prix {
   font-size: 16px;
-  color: black;
+  margin-bottom: 5px;
+  padding: 16px 32px;
   text-align: justify;
   overflow: hidden;
   max-height: 3em;
-  line-height: 1em;
+  line-height: 1.5em;
+  /*Tout ce qui suit après a ete ajouter*/
+  font-family: 'Palatino', serif;
 }
 
 .livre-description {
   font-size: 16px;
   text-align: justify;
   overflow: hidden;
-  max-height: 150px;
-  line-height: 1em;
+  max-height: 80px;
+  /*A ete modifier*/
+  line-height: 1.5em;
+  /*Tout ce qui suit après a ete ajouter*/
+  font-family: 'Palatino', serif;
+  /*A ete modifier*/
+  height: 200px;
 }
 
 
@@ -313,6 +489,34 @@ p {
 
 .livre-item .stock-vide{
   color : red;
+}
+
+.banniere2{
+  position: relative;
+  width: 100%;
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-catalogue{
+  align-items: center;
+  font-size: 1em;
+  color: #162142;
+  background: white;
+  padding: 10px 20px;
+  display: inline-block;
+  margin-top: 20px;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0;
+  transition: 0.5s;
+  margin-left: 10px;
+}
+
+.btn-catalogue:hover{
+  letter-spacing: 2px;
 }
 
 </style>
