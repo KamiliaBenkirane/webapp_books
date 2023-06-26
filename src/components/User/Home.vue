@@ -33,12 +33,11 @@
                 Lire la suite
               </span>
             </p>
-            <h5 class="livre-note">Note : {{livre.note}}/5</h5>
-            <h5 class="livre-prix">Prix : {{livre.prix}}€ </h5>
-            <div v-if="livre.stock>0">
+            <h5 class="livre-note">Note : {{livre.note}}/5<br><br>Prix : {{livre.prix}}€</h5>
+            <div class="white" v-if="livre.stock>0">
               <button v-if="livre.quantite>0" class="addToCart" @click="addToCart(livre)">Ajouter au panier</button>
               <button v-else class="addToCartDisabled" @click="addToCart(livre)" disabled>Ajouter au panier</button>
-              <button @click="decrement(livre)">-</button> {{ livre.quantite }} <button @click="increment(livre)">+</button>
+              <button @click="decrement(livre)">-</button> {{ livre.quantite }}<button @click="increment(livre)">+</button>
               <p v-show="livre.quantite === livre.stock">Limite du stock !</p>
             </div>
             <div v-else>
@@ -55,7 +54,6 @@
 
       </section>
     </div>
-    <Footer/>
 
 
 
@@ -67,15 +65,13 @@
 <script>
 import axios from 'axios'
 import Navbar from "@/components/User/Navbar";
-import Footer from "@/components/User/Footer";
 import {useSessionStore} from "@/stores/session";
 
 
 export default {
   name: "Home",
   components: {
-    Navbar,
-    Footer
+    Navbar
   },
   setup () {
     const store = useSessionStore()
@@ -208,9 +204,19 @@ export default {
   color: #3F89A7;
 }
 
+.white{
+  color : white;
+  margin-top : 20px;
+}
+
 body{
   font-family:'Palatino', serif;;
   font-weight: 500;
+  color : white;
+}
+
+#text{
+  color : white;
 }
 
 .banniere1{
@@ -267,7 +273,7 @@ button:hover{
 .livres-list {
   grd-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   width : 100%;
-  max-width: 1200px;
+  max-width: 1350px;
   margin: 0 auto;
   padding: 10px;
   display: flex;
@@ -320,16 +326,16 @@ p {
 
 .livre-item {
   position: relative;
-  width: calc(33.33% - 20px);
+  width: calc(33.33% - 70px);
   margin-right: 10px;
   margin-bottom: 20px;
-  padding: 0;
   border: 1px solid unset;
   border-radius: 20px;
-  background-color: unset;
   text-align : center;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(0,0,0,0.7);
+  padding : 10px;
 }
 
 .livre-item img {

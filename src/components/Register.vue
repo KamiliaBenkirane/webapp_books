@@ -74,7 +74,11 @@ export default {
         adresse: this.adresse,
         mdp: this.mdp,
       })
-          .then((response) => console.log(response))
+          .then((response) => {
+            alert("Votre compte a bien été enregistré !")
+            this.$router.push("/")
+
+          })
           .catch((err) => console.log(err));
       }
 

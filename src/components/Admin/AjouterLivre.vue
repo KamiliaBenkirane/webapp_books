@@ -1,6 +1,7 @@
 <template>
-  <Sidebar/>
+
 <div class="container">
+  <Sidebar/>
   <div class="form-container">
     <div class="flex">
       <div class="register">
@@ -79,7 +80,9 @@ import axios from 'axios'
 
 export default {
   name: "AjouterLivre",
-  components: {Sidebar},
+  components: {
+    Sidebar
+  },
   date(){
     return{
       titre : '',

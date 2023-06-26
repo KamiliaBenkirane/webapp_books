@@ -37,7 +37,6 @@
 
 <script>
 import Navbar from "@/components/User/Navbar";
-import Footer from "@/components/User/Footer";
 import axios from 'axios'
 import {useSessionStore} from "@/stores/session";
 
@@ -45,7 +44,6 @@ export default {
   name: "Panier",
   components : {
     Navbar,
-    Footer
   },
 
   setup () {

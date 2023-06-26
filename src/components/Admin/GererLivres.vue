@@ -83,7 +83,6 @@ export default {
 
 
 .container{
-  background-color: #3F89A7;
   margin-left : 0;
   width: 100%;
   height: 100%;
@@ -99,6 +98,10 @@ img{
   width: auto;
   height: 200px;
   border-radius: 10px;
+}
+
+h3{
+  color : white
 }
 h4{
   line-height: 15px;

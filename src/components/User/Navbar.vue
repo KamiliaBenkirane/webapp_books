@@ -12,13 +12,7 @@
       </ol>
 
       <ul class="nav-list">
-        <li>
-          <router-link to="/favoris">
-            <button>
-              <img src="../../assets/favori.png" alt="icone favori">
-            </button>
-          </router-link>
-        </li>
+
         <li>
           <router-link to="/panier">
             <button class="flex_icone_panier">

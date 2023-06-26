@@ -93,12 +93,13 @@ a{
 .sidebar {
   transition : all 0.2s ease;
   width: 70px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('https://wallpapercave.com/wp/wp5991978.jpg');
+  background-color: white;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
   position: fixed;
+  z-index : 100;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
